@@ -28,12 +28,12 @@ namespace ProfitMaximizer
             this.pnlDice.DataBindings.Add("Enabled", this.radDiceRoll, "Checked");
             this.pnlRoulette.DataBindings.Add("Enabled", this.radRoulette, "Checked");
 
-            this.diceCount.DataBindings.Add("Value", this.diceRoll, "NumberOfDice");
-            this.diceFaceCount.DataBindings.Add("Value", this.diceRoll, "DiceFaces");
+            this.diceCount.DataBindings.Add("Value", this.diceRoll.DiceRoller, "NumberOfDice");
+            this.diceFaceCount.DataBindings.Add("Value", this.diceRoll.DiceRoller, "DiceFaces");
 
-            this.whiteCount.DataBindings.Add("Value", this.roulette, "WhiteSlots");
-            this.blackCount.DataBindings.Add("Value", this.roulette, "BlackSlots");
-            this.redCount.DataBindings.Add("Value", this.roulette, "RedSlots");
+            this.whiteCount.DataBindings.Add("Value", this.roulette.Roller, "WhiteSlots");
+            this.blackCount.DataBindings.Add("Value", this.roulette.Roller, "BlackSlots");
+            this.redCount.DataBindings.Add("Value", this.roulette.Roller, "RedSlots");
         }
         private void SetFormatForResultsView()
         {
