@@ -6,7 +6,7 @@ namespace PXBetMaster
 {
     public interface IGamblingMachine<T> where T : Wager
     {
-        BettingResult Play<WagerT>(WagerT wager) where WagerT : Wager;
+        BettingResult Play(Wager wager);
         BettingResult Simulate(int iterations);
     }
 }

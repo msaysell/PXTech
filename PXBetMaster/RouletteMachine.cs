@@ -42,11 +42,15 @@ namespace PXBetMaster
             return RedSlots + BlackSlots + WhiteSlots;
         }
 
-        public override BettingResult Play<RouletteWager>(RouletteWager wager)
+        public override BettingResult Play(Wager wager)
         {
+            var rouletteWager = wager as RouletteWager;
+            if (rouletteWager == null)
+                throw new ArgumentException();
+
             var roll = this.rand.Next(GetTotalSlots());
             RouletteOption? result = null;
-            var potentialReturns = wager.Stake * COLOUR_RETURNS;
+            var potentialReturns = rouletteWager.Stake * COLOUR_RETURNS;
 
             if (roll < this.RedSlots)
                 result = RouletteOption.Red;
@@ -54,11 +58,11 @@ namespace PXBetMaster
                 result = RouletteOption.Black;
             else
             {
-                potentialReturns = wager.Stake * WHITE_RETURNS;
+                potentialReturns = rouletteWager.Stake * WHITE_RETURNS;
             }
-            var wonBet = result == null || result == ((RouletteWager)wager).Choice;
+            var wonBet = result == null || result == rouletteWager.Choice;
 
-            return new BettingResult(wager.Stake, wonBet, wonBet ? potentialReturns : 0);
+            return new BettingResult(rouletteWager.Stake, wonBet, wonBet ? potentialReturns : 0);
         }
 
         public override BettingResult Simulate(int iterations)

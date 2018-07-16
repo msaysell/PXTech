@@ -27,7 +27,7 @@ namespace PXBetMaster
             return this.GetType().Name;
         }
 
-        public virtual BettingResult Play<T>(T wager) where T : Wager
+        public virtual BettingResult Play(Wager wager)
         {
             throw new NotImplementedException();
         }

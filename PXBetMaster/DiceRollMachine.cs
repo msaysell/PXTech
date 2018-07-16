@@ -11,7 +11,7 @@ namespace PXBetMaster
         private const ushort DiceFaces = 6;
         private const float returnRate = 1.5f;
 
-        public override BettingResult Play<T>(T wager)
+        public override BettingResult Play(Wager wager)
         {
             var diceRolls = Enumerable.Range(1, NumberOfDice).Select(x => rand.Next(DiceFaces));
             var allEqual = diceRolls.Distinct().Count() == 1;
