@@ -23,24 +23,20 @@ namespace PXBetMaster
         private const float WHITE_RETURNS = 0.1f;
         private const float COLOUR_RETURNS = 2.0f;
 
-        public ushort RedSlots { get; set; }
-        public ushort BlackSlots { get; set; }
-        public ushort WhiteSlots { get; set; }
+        public IRouletteRoller Roller { get; set;}
 
-
-        public RouletteMachine(ushort redCount=RouletteMachine.COLOUR_SLOTS_DEFAULT,
+        public RouletteMachine(ushort redCount = RouletteMachine.COLOUR_SLOTS_DEFAULT,
             ushort blackCount = RouletteMachine.COLOUR_SLOTS_DEFAULT,
             ushort whiteCount = RouletteMachine.WHITE_SLOTS_DEFAULT)
         {
-            RedSlots = redCount;
-            BlackSlots = blackCount;
-            WhiteSlots = whiteCount;
+            Roller = new RouletteRoller()
+            {
+                RedSlots = redCount,
+                BlackSlots = blackCount,
+                WhiteSlots = whiteCount
+            };
         }
 
-        private int GetTotalSlots()
-        {
-            return RedSlots + BlackSlots + WhiteSlots;
-        }
 
         public override BettingResult Play(Wager wager)
         {
@@ -48,13 +44,13 @@ namespace PXBetMaster
             if (rouletteWager == null)
                 throw new ArgumentException();
 
-            var roll = this.rand.Next(GetTotalSlots());
+            var roll = Roller.SpinWheel();
             RouletteOption? result = null;
             var potentialReturns = rouletteWager.Stake * COLOUR_RETURNS;
 
-            if (roll < this.RedSlots)
+            if (roll < Roller.RedSlots)
                 result = RouletteOption.Red;
-            else if (roll < this.RedSlots + this.BlackSlots)
+            else if (roll < Roller.RedSlots + Roller.BlackSlots)
                 result = RouletteOption.Black;
             else
             {
