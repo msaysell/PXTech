@@ -7,35 +7,53 @@ namespace GamblingCLI
 {
     class Program
     {
-        static readonly int SIMULATIONS = 10000;
+        static readonly int DEFAULT_SIMULATIONS = 10000;
         static void Main(string[] args)
+        {
+            int simulationCount = DEFAULT_SIMULATIONS;
+            if (args.Length > 0)
+                if (!int.TryParse(args[0], out simulationCount))
+                    simulationCount = DEFAULT_SIMULATIONS;
+
+            do
+            {
+                Console.WriteLine("Running Simulation...");
+            }
+            while (SimulateOutcome(simulationCount));
+        }
+
+        static bool SimulateOutcome(int iterationCount)
         {
             var diceRoll = new DiceRollMachine();
             var roulette = new RouletteMachine();
-            var rouletteResults = roulette.Simulate(SIMULATIONS);
-            var diceRollResults = diceRoll.Simulate(SIMULATIONS);
+            var rouletteResults = roulette.Simulate(iterationCount);
+            var diceRollResults = diceRoll.Simulate(iterationCount);
 
             var rouletteTitle = "Roulette";
-            var diceRollTitle = rouletteTitle;
-            var roulettePercentage = OutputSimResults(rouletteTitle, rouletteResults);
-            var diceRollPercentage = OutputSimResults(rouletteTitle, diceRollResults);
+            var diceRollTitle = "Dice Roll";
+            var roulettePercentage = OutputSimResults(rouletteTitle, iterationCount, rouletteResults);
+            var diceRollPercentage = OutputSimResults(diceRollTitle, iterationCount, diceRollResults);
             var bestMachine = "Neither";
             if (roulettePercentage > diceRollPercentage)
                 bestMachine = diceRollTitle;
             else if (roulettePercentage < diceRollPercentage)
                 bestMachine = rouletteTitle;
 
-            Console.WriteLine($"{bestMachine} would provide the best profit margin.");  
-            Console.ReadKey();
+            Console.WriteLine($"{bestMachine} would provide the best profit margin.\n");
+
+            Console.WriteLine("Would you like to rerun the simulation? (y/n)");
+
+            return Console.ReadLine().ToLower() == "y";
+
         }
 
-        static float OutputSimResults(string machineName, BettingResult resultsAvg)
+        static float OutputSimResults(string machineName, int simulationCount, BettingResult resultsAvg)
         {
             var totalBet = resultsAvg.InitialStake;
             var totalWinnings = resultsAvg.Returns;
             var profitPercentage = totalWinnings / totalBet;
 
-            Console.WriteLine($"{machineName}: {SIMULATIONS:n0} tests were run; Profit: £{totalBet - totalWinnings}; Profit Percentage: {1.0 - profitPercentage:P2}");
+            Console.WriteLine($"{machineName}: {simulationCount:n0} tests were run; Profit: £{totalBet - totalWinnings}; Profit Percentage: {1.0 - profitPercentage:P2}");
 
             return profitPercentage;
 
