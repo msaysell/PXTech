@@ -7,9 +7,15 @@ namespace PXBetMaster
 {
     public class DiceRollMachine : BaseGamblingMachine, IGamblingMachine<Wager>
     {
-        private const ushort NumberOfDice = 2;
-        private const ushort DiceFaces = 6;
+        public ushort NumberOfDice { get; set; }
+        public ushort DiceFaces { get; set; }
         private const float returnRate = 1.5f;
+
+        public DiceRollMachine(ushort numberOfDice = 2, ushort diceFaceCount = 6)
+        {
+            this.NumberOfDice = numberOfDice;
+            this.DiceFaces = diceFaceCount;
+        }
 
         public override BettingResult Play(Wager wager)
         {

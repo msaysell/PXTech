@@ -51,10 +51,29 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="MachineControls\DiceRollControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MachineControls\DiceRollControl.Designer.cs">
+      <DependentUpon>DiceRollControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MachineControls\RouletteControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MachineControls\RouletteControl.Designer.cs">
+      <DependentUpon>RouletteControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimulationResult.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MachineControls\DiceRollControl.resx">
+      <DependentUpon>DiceRollControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MachineControls\RouletteControl.resx">
+      <DependentUpon>RouletteControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
