@@ -14,6 +14,10 @@ A class library providing different classes gambling machines, wagers, and a bet
 
 A winforms form providing the simulation with options to change parameters of the gambling machines to determine the effects it would have on profit outcome.
 
+---
+
+# Questions and Answers
+
 > Which of these two betting machines would be most appropriate to implement? 
 
 The **Roulette** machine would be the most appropriate to implement. Whilst, the dice roll will provide larger profits, it cannot provide certainty that it will operate within limits.
