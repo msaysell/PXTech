@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PXBetMaster
 {
-    public class BaseGamblingMachine : IGamblingMachine<Wager>
+    public abstract class BaseGamblingMachine : IGamblingMachine<Wager>
     {
         protected Random rand { get; private set; }
         protected BaseGamblingMachine()
